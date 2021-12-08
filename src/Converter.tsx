@@ -14,6 +14,8 @@ const API_KEY = "ME4N1I6UO04FTYAE";
 const API = (baseCurrency: string, targetCurrency: string) =>
   `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${baseCurrency}&to_currency=${targetCurrency}&apikey=${API_KEY}`;
 
+const roundValue = (num: number) => Math.round(num * 1000) / 1000;
+
 export default function Converter() {
   const {
     baseCurrency,
@@ -56,7 +58,7 @@ export default function Converter() {
           <Input
             type="number"
             disabled={exchangeRate === 0}
-            value={baseValue === 0 ? "" : baseValue}
+            value={baseValue === 0 ? "" : roundValue(baseValue)}
             onChange={(e) => {
               setBaseValue(Number(e.target.value));
             }}
@@ -74,7 +76,7 @@ export default function Converter() {
           <Input
             type="number"
             disabled={exchangeRate === 0}
-            value={baseValue === 0 ? "" : baseValue * exchangeRate}
+            value={baseValue === 0 ? "" : roundValue(baseValue * exchangeRate)}
             onChange={(e) => {
               if (exchangeRate !== 0) {
                 setBaseValue(Number(e.target.value) / exchangeRate);
@@ -113,16 +115,10 @@ function useCurrencyExchange() {
   useEffect(() => {
     if (baseCurrency && targetCurrency) {
       setExchangeRate(0);
-      // setTargetCurrencyRate(1.5);
       fetch(API(baseCurrency, targetCurrency))
         .then((res) => res.json())
         .then((data) => {
-          console.log({ data });
           setExchangeRate(
-            Number(data["Realtime Currency Exchange Rate"]["5. Exchange Rate"])
-          );
-          console.log(
-            "rate",
             Number(data["Realtime Currency Exchange Rate"]["5. Exchange Rate"])
           );
         });
@@ -137,7 +133,3 @@ function useCurrencyExchange() {
     exchangeRate,
   };
 }
-/**
-*
-  {"Realtime Currency Exchange Rate":{"1. From_Currency Code":"USD","2. From_Currency Name":"United States Dollar","3. To_Currency Code":"JPY","4. To_Currency Name":"Japanese Yen","5. Exchange Rate":"113.16800000","6. Last Refreshed":"2021-11-30 19:26:44","7. Time Zone":"UTC","8. Bid Price":"113.16290000","9. Ask Price":"113.17360000"}}
-    */
