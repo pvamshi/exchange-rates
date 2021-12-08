@@ -24,6 +24,8 @@
   - Use [mswjs](https://mswjs.io/) to mock the network calls 
 - [ ] Graph plotting daily changes 
 - [ ] github pages 
+- [ ] Better way to handle rounding of the values 
+- [ ] Better way to handle API Key securely
 - [ ] Improved UX
   - Show fetching of prices info to the user
   - Responsive design
