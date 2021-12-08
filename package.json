@@ -1,0 +1,27 @@
+{
+  "name": "exchange-rates",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "parcel src/index.html"
+  },
+  "keywords": [],
+  "author": "Vamshi Krishna Pothuka",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^17.0.37",
+    "msw": "^0.35.0",
+    "parcel": "^2.0.1"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^1.7.2",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "msw": {
+    "workerDirectory": "public"
+  }
+}
